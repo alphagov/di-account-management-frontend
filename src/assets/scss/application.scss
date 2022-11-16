@@ -174,3 +174,282 @@ $govuk-new-link-styles: true;
     }
   }
 }
+
+// start x service header
+// this is a combination of custom CSS and styles copied over from the header component in the Design System 
+.x-service-header {
+  @include govuk-font($size: 16);
+  color: govuk-colour("white");
+  background: govuk-colour("black");
+}
+
+.x-service-header__container {
+  display: flex;
+  justify-content: space-between;
+  align-items: stretch;
+}
+
+.x-service-header__logo {
+  min-width: max-content;
+  padding-top: govuk-spacing(2);
+  padding-bottom: govuk-spacing(2);
+  max-width: 33.33%;
+  @include govuk-media-query ($from: desktop) {
+    width: 33.33%;
+    padding-right: govuk-spacing(3);
+  }
+}
+
+$govuk-header-link-underline-thickness: 3px;
+
+.x-service-header__link:link, .x-service-header__link:visited {
+  @include govuk-typography-common;
+  @include govuk-link-style-inverse;
+  text-decoration: none;
+
+  &:hover {
+    text-decoration: underline;
+    text-decoration-thickness: $govuk-header-link-underline-thickness;
+
+    @if $govuk-link-underline-offset {
+      text-underline-offset: $govuk-link-underline-offset;
+    }
+  }
+
+  &:focus {
+    @include govuk-focused-text;
+  }
+}
+
+.x-service-header__logotype {
+  display: inline-block;
+
+  // Add a gap after the logo in case it's followed by a product name. This
+  // gets removed later if the logotype is a :last-child.
+  margin-right: govuk-spacing(1);
+
+  // Prevent readability backplate from obscuring underline in Windows High
+  // Contrast Mode
+  @media (forced-colors: active) {
+    forced-color-adjust: none;
+    color: linktext;
+  }
+
+  // Remove the gap after the logo if there's no product name to keep hover
+  // and focus states neat
+  &:last-child {
+    margin-right: 0;
+  }
+}
+
+.x-service-header__logotype-crown {
+  position: relative;
+  top: -1px;
+  margin-right: 1px;
+  fill: currentcolor;
+  vertical-align: top;
+}
+
+.x-service-header__logotype-crown-fallback-image {
+  width: 36px;
+  height: 32px;
+  border: 0;
+  vertical-align: bottom;
+}
+
+.x-service-header__link--homepage {
+  // Font size needs to be set on the link so that the box sizing is correct
+  // in Firefox
+  @include govuk-font($size: false, $weight: bold);
+
+  display: inline-block;
+  margin-right: govuk-spacing(2);
+  font-size: 30px; // We don't have a mixin that produces 30px font size
+  line-height: 1;
+
+  @include govuk-media-query($from: tablet) {
+    display: inline;
+
+    &:focus {
+      // Replicate the focus box shadow but without the -2px y-offset of the first yellow shadow
+      // This is to stop the logo getting cut off by the box shadow when focused on above a product name
+      box-shadow: 0 0 $govuk-focus-colour;
+    }
+  }
+
+  &:link,
+  &:visited {
+    text-decoration: none;
+  }
+
+  &:hover,
+  &:active {
+    // Negate the added border
+    margin-bottom: $govuk-header-link-underline-thickness * -1;
+    // Omitting colour will use default value of currentColor – if we
+    // specified currentColor explicitly IE8 would ignore this rule.
+    border-bottom: $govuk-header-link-underline-thickness solid;
+  }
+
+  // Remove any borders that show when focused and hovered.
+  &:focus {
+    margin-bottom: 0;
+    border-bottom: 0;
+  }
+}
+
+.x-service-header__content {
+  padding-top: govuk-spacing(2);
+  padding-bottom: govuk-spacing(2);
+
+  @include govuk-media-query ($from: desktop) {
+    width: 66.66%;
+    padding-left: govuk-spacing(3);
+    padding-right: govuk-spacing(3);
+  }
+}
+
+.x-service-header__service-name {
+  @include govuk-font($size: 24, $weight: bold);
+}
+
+.x-service-header__content--visible-mobile {
+  display: none;
+  @include govuk-media-query ($until: tablet) {
+    display: block;
+  }
+}
+
+.x-service-header__content--hidden-mobile {
+  display: block;
+  @include govuk-media-query ($until: tablet) {
+    display: none;
+  }
+}
+
+.x-service-nav__button {
+  position: relative;
+  @include govuk-font($size: 16, $weight: bold);
+  min-width: max-content;
+  border: 0;
+  margin: 0;
+  background: none;
+  color: govuk-colour("white");
+  padding: govuk-spacing(3) govuk-spacing(4);
+
+  @include govuk-media-query ($from: tablet) {
+    display: flex;
+    align-items: flex-start;
+  }
+
+  &:focus {
+    @include govuk-focused-text;
+  }
+
+  &.x-service-nav__button--open {
+    color: govuk-colour("blue");
+    background-color: govuk-colour("light-grey");
+
+    &:focus {
+      @include govuk-focused-text;
+    }
+
+    @include govuk-media-query($from: tablet) {
+      &:after {
+        content: "";
+        position: absolute;
+        height: 5px;
+        background-color: govuk-colour("blue");
+        width: 100%;
+        width: calc(100% - 40px);
+        left: 50%;
+        transform: translateX(-50%);
+        bottom: 0;
+      }
+
+      &:focus:after {
+        content: none;
+      }
+    }
+  }
+
+}
+
+.x-service-nav__button-content {
+  .x-service-nav__button-content--hidden-mobile {
+    display: inline;
+
+    @include govuk-media-query ($until: tablet) {
+      display: none;
+    }
+  }
+
+  &:before {
+    content: "";
+    box-sizing: border-box;
+    display: inline-block;
+    position: relative;
+    width: 0.75rem;
+    height: 0.75rem;
+    transform: rotate(135deg);
+    border-top: 0.15rem solid;
+    border-right: 0.15rem solid;
+    margin-right: govuk-spacing(2);
+    margin-bottom: 0.2rem;
+
+    .x-service-nav__button--open & {
+      transform: rotate(-45deg);
+      margin-bottom: -0.3rem;
+    }
+  }
+}
+
+.x-service-nav {
+  display: none;
+  overflow: hidden;
+  background: govuk-colour("light-grey");
+  border-bottom: 1px solid $govuk-border-colour;
+
+  &.x-service-nav--open {
+    display: block;
+  }
+}
+
+.x-service-nav__list { 
+  display: flex;
+  justify-content: space-between;
+  padding: 0;
+  margin: 0;
+  list-style: none;
+
+  @include govuk-media-query ($until: tablet) {
+    flex-flow: column;
+  }
+}
+
+.x-service-nav__list-container {
+  @include govuk-media-query ($until: tablet) {
+    margin-left: 0;
+    margin-right: 0;
+  }
+}
+
+.x-service-nav__list-item {
+  width: 210px;
+  padding: govuk-spacing(6) 0;
+
+  @include govuk-media-query ($until: tablet) {
+    border-bottom: 1px solid $govuk-border-colour;
+    padding: govuk-spacing(4) govuk-spacing(3);
+    width: 100%;
+  }
+}
+
+.x-service-nav__link {
+  @extend %govuk-link;
+  @include govuk-font($size: 19, $weight: bold);
+
+  @include govuk-media-query ($until: tablet) {
+    @include govuk-font($size: 24, $weight: bold);
+  }
+}
