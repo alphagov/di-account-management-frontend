@@ -1,7 +1,11 @@
-import { KMS } from "aws-sdk";
+import { DynamoDB, KMS } from "aws-sdk";
 
 export interface KmsService {
   sign: (payload: string) => Promise<KMS.Types.SignResponse>;
+}
+
+export interface DynamoDBService {
+  getItem: (getCommand: DynamoDB.Types.DynamoDBRequest) => Promise<DynamoDB.Types.GetItemOutput>;
 }
 
 export interface AwsConfig {

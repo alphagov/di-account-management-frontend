@@ -46,6 +46,16 @@ function getLocalStackAWSConfig(): AwsConfig {
   }
 }
 
+export function getAWSConfig(): AwsConfig {
+  if (getAppEnv() === "local") {
+    return getLocalStackAWSConfig();
+  }
+
+  return {
+    region: getAwsRegion(),
+  }
+}
+
 export function getKMSConfig(): KmsConfig {
   if (getAppEnv() === "local") {
     return getLocalStackKmsConfig();
