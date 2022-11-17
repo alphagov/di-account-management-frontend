@@ -126,6 +126,10 @@ export function supportNewAccountHeader(): boolean {
   return process.env.SUPPORT_NEW_ACCOUNT_HEADER === "1";
 }
 
+export function supportServiceCards(): boolean {
+  return process.env.SUPPORT_SERVICE_CARDS === "1";
+}
+
 export function getLogoutTokenMaxAge(): number {
   return Number(process.env.LOGOUT_TOKEN_MAX_AGE_SECONDS) || 120;
 }

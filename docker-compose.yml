@@ -1,4 +1,4 @@
-version: '3.8'
+version: "3.8"
 
 services:
   localstack:
@@ -50,4 +50,5 @@ services:
       - SUPPORT_INTERNATIONAL_NUMBERS=${SUPPORT_INTERNATIONAL_NUMBERS}
       - SUPPORT_LANGUAGE_CY=${SUPPORT_LANGUAGE_CY}
       - SUPPORT_NEW_ACCOUNT_HEADER=${SUPPORT_NEW_ACCOUNT_HEADER}
+      - SUPPORT_SERVICE_CARDS=${SUPPORT_SERVICE_CARDS}
     restart: on-failure
