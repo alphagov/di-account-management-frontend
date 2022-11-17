@@ -1,32 +1,12 @@
 import { Request, Response } from "express";
+import { presentYourServices } from "../../utils/yourServices"
 
-const accountsList = [
-  {
-    "client_id": "sub1234",
-    "last_accessed": "10 October 2022"
-  },
-  {
-    "client_id": "sub4567",
-    "last_accessed": "10 October 2022"
-  }
-]
-
-const servicesList = [
-  {
-    "client_id": "sub8910",
-    "last_accessed": "10 October 2022"
-  },
-  {
-    "client_id": "sub1112",
-    "last_accessed": "10 October 2022"
-  }
-]
-
-export function yourServicesGet(req: Request, res: Response): void {
+export async function yourServicesGet(req: Request, res: Response): Promise<void> {
+  const serviceData = await presentYourServices(req.session.subjectId)
   const data = {
     email: req.session.user.email,
-    accountsList: accountsList,
-    servicesList: servicesList,
+    accountsList: serviceData.accountsList,
+    servicesList: serviceData.servicesList,
   };
 
   res.render("your-services/index.njk", data);
