@@ -1,11 +1,30 @@
 import { DynamoDB, KMS } from "aws-sdk";
 
+type ClientId = string;
+type UrnFdnSub = string;
+
+export interface UserServices {
+  user_id: UrnFdnSub;
+  services: Service[];
+}
+
+export interface Service {
+  client_id: ClientId;
+  count_successful_logins: number;
+  last_accessed: string;
+}
+
+export interface YourServices {
+  accountsList: Service[],
+  servicesList: Service[],
+}
+
 export interface KmsService {
   sign: (payload: string) => Promise<KMS.Types.SignResponse>;
 }
 
 export interface DynamoDBService {
-  getItem: (getCommand: DynamoDB.Types.DynamoDBRequest) => Promise<DynamoDB.Types.GetItemOutput>;
+  getItem: (getCommand: DynamoDB.Types.GetItemInput) => Promise<DynamoDB.Types.GetItemOutput>,
 }
 
 export interface AwsConfig {

@@ -114,6 +114,10 @@ export function getKmsKeyId(): string {
   return process.env.KMS_KEY_ID;
 }
 
+export function getDynamoServiceStoreTableName(): string {
+  return process.env.SERVICE_STORE_TABLE_NAME;
+}
+
 export function supportInternationalNumbers(): boolean {
   return process.env.SUPPORT_INTERNATIONAL_NUMBERS === "1";
 }
@@ -145,6 +149,18 @@ export function getManageGovukEmailsUrl(): string {
 export function getServiceDomain(): string {
   return process.env.SERVICE_DOMAIN ?? "";
 }
+
+export const getAllowedAccountListClientIDs: string[] = [
+  "client_id_1",
+  "client_id_2",
+  "client_id_3",
+]
+
+export const getAllowedServiceListClientIDs: string[] = [
+  "client_id_4",
+  "client_id_5",
+  "client_id_6",
+]
 
 function getProtocol(): string {
   return getAppEnv() !== "local" ? "https://" : "http://";
