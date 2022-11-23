@@ -30,9 +30,15 @@ const getServiceStoreItem = async (subjectId: string): Promise<Service[]> => {
 
 export const presentYourServices = async (subjectId: string): Promise<YourServices> => {
   const userServices = await getServiceStoreItem(subjectId)
-
-  return {
-    accountsList: userServices.filter(service => getAllowedAccountListClientIDs.includes(service.client_id)),
-    servicesList: userServices.filter(service => getAllowedServiceListClientIDs.includes(service.client_id)),
+  if (userServices) {
+    return {
+      accountsList: userServices.filter(service => getAllowedAccountListClientIDs.includes(service.client_id)),
+      servicesList: userServices.filter(service => getAllowedServiceListClientIDs.includes(service.client_id)),
+    }
+  } else {
+    return {
+      accountsList: [],
+      servicesList: []
+    }
   }
 }

@@ -2,12 +2,17 @@ import { Request, Response } from "express";
 import { presentYourServices } from "../../utils/yourServices"
 
 export async function yourServicesGet(req: Request, res: Response): Promise<void> {
-  const serviceData = await presentYourServices(req.session.subjectId)
-  const data = {
-    email: req.session.user.email,
-    accountsList: serviceData.accountsList,
-    servicesList: serviceData.servicesList,
-  };
+  const { user } = req.session
+  if (user && user.subjectId) {
+    const serviceData = await presentYourServices(user.subjectId)
+    const data = {
+      email: req.session.user.email,
+      accountsList: serviceData.accountsList,
+      servicesList: serviceData.servicesList,
+    };
 
-  res.render("your-services/index.njk", data);
+    res.render("your-services/index.njk", data);
+  } else {
+    res.render("your-services/index.njk", { email: user.email });
+  }
 }
