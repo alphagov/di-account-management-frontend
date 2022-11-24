@@ -11,7 +11,7 @@ export AWS_PROFILE=test-profile
 export BUILD_CLIENT_ID=nXx0aoWYfQr13mhQ1Kr9WLAOR7WMQZFmRT4-Yoq7Uw0
 
 aws --endpoint-url=http://localhost:4566 dynamodb create-table \
-    --cli-input-json "$(cat  ./$TABLE_SCHEMA_SEED)" \
+    --cli-input-json "$(cat  ./localstack/$TABLE_SCHEMA_SEED)" \
     --profile $AWS_PROFILE \
     --region eu-west-2 \
   | cat
