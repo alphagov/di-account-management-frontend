@@ -181,12 +181,28 @@ $govuk-new-link-styles: true;
   @include govuk-font($size: 16);
   color: govuk-colour("white");
   background: govuk-colour("black");
+  position: relative;
+  margin-bottom: 10px;
 }
 
 .x-service-header__container {
   display: flex;
+  position: relative;
   justify-content: space-between;
   align-items: stretch;
+
+  &.x-service-header__container--blue-bar {
+    &:after {
+      display: block;
+      content: "";
+      height: 10px;
+      background-color: #1d70b8;
+      position: absolute;
+      top: 100%;
+      left: 0;
+      width: 100%;
+    }
+  }
 }
 
 .x-service-header__logo {
@@ -328,63 +344,38 @@ $govuk-header-link-underline-thickness: 3px;
 }
 
 .x-service-nav__button {
+  display: none;
+
+  .js-enabled & {
+    display: inline;
+    display: flex;
+  }
+
   position: relative;
+  align-items: flex-start;
+  cursor: pointer;
   @include govuk-font($size: 16, $weight: bold);
+  min-width: 240px;
   min-width: max-content;
   border: 0;
   margin: 0;
   background: none;
   color: govuk-colour("white");
-  padding: govuk-spacing(3) govuk-spacing(4);
-
-  @include govuk-media-query ($from: tablet) {
-    display: flex;
-    align-items: flex-start;
-  }
-
-  &:focus {
-    @include govuk-focused-text;
-  }
-
-  &.x-service-nav__button--open {
-    color: govuk-colour("blue");
-    background-color: govuk-colour("light-grey");
-
-    &:focus {
-      @include govuk-focused-text;
-    }
-
-    @include govuk-media-query($from: tablet) {
-      &:after {
-        content: "";
-        position: absolute;
-        height: 5px;
-        background-color: govuk-colour("blue");
-        width: 100%;
-        width: calc(100% - 40px);
-        left: 50%;
-        transform: translateX(-50%);
-        bottom: 0;
-      }
-
-      &:focus:after {
-        content: none;
-      }
-    }
-  }
-
-}
-
-.x-service-nav__button-content {
-  .x-service-nav__button-content--hidden-mobile {
-    display: inline;
-
-    @include govuk-media-query ($until: tablet) {
-      display: none;
-    }
-  }
+  padding: govuk-spacing(3) govuk-spacing(2);
 
   &:before {
+    content: none;
+    position: absolute;
+    height: 5px;
+    background-color: $govuk-focus-text-colour;
+    width: 100%;
+    width: calc(100% - 40px);
+    left: 50%;
+    transform: translateX(-50%);
+    bottom: 0;
+  }
+
+  &:after {
     content: "";
     box-sizing: border-box;
     display: inline-block;
@@ -396,23 +387,144 @@ $govuk-header-link-underline-thickness: 3px;
     border-right: 0.15rem solid;
     margin-right: govuk-spacing(2);
     margin-bottom: 0.2rem;
+  }
 
-    .x-service-nav__button--open & {
+  &:focus {
+    background: $govuk-focus-colour;
+    color: $govuk-focus-text-colour;
+    outline: 3px solid transparent;
+    &:not(:focus-visible) {
+      outline: none;
+      color: govuk-colour("white");
+      background: none;
+    }
+  }
+
+  &:focus-visible {
+    background: $govuk-focus-colour;
+    color: $govuk-focus-text-colour;
+    outline: 3px solid transparent;
+
+    &:hover {
+      color: $govuk-focus-text-colour;
+
+      &:before {
+        background-color: $govuk-focus-text-colour;
+      }
+    }
+  }
+
+  @include govuk-media-query ($from: tablet) {
+    padding: govuk-spacing(3) govuk-spacing(4);
+
+    &:before {
+      content: "";
+    }
+
+    &:hover {
+      &,
+      &:focus:not(:focus-visible) {
+        color: govuk-colour("mid-grey");
+    
+        &:before {
+          background-color: govuk-colour("mid-grey");
+        }
+      }
+    }
+  }
+
+  &.x-service-nav__button--open {
+    color: govuk-colour("blue");
+    background-color: govuk-colour("light-grey");
+  
+    &:after {
       transform: rotate(-45deg);
-      margin-bottom: -0.3rem;
+      margin-top: 0.4rem;
+    }
+
+    &:focus {
+      background: $govuk-focus-colour;
+      color: $govuk-focus-text-colour;
+      outline: 3px solid transparent;
+      &:not(:focus-visible) {
+        outline: none;
+        color: govuk-colour("blue");
+        background: govuk-colour("light-grey");
+      }
+    }
+  
+    &:focus-visible {
+      background: $govuk-focus-colour;
+      color: $govuk-focus-text-colour;
+      outline: 3px solid transparent;
+    }
+
+    @include govuk-media-query($from: tablet) {
+      &:before {
+        background-color: govuk-colour("blue");
+      }
+
+      &:focus:before {
+        background-color: $govuk-focus-text-colour;
+      }
+  
+      &:focus:not(:focus-visible):before {
+        background-color: govuk-colour("blue");
+      }
+
+      &:focus-visible:before {
+        background-color: $govuk-focus-text-colour;
+      }
+    }
+  }
+}
+
+.x-service-nav__button-content,
+.x-service-nav__button-icon {
+  margin-right: govuk-spacing(2);
+}
+
+.x-service-nav__button-icon {
+  &.x-service-nav__button-icon--open {
+    display: none;
+  }
+
+  .x-service-nav__button--open &,
+  .x-service-nav__button:focus-visible & {
+    &.x-service-nav__button-icon--closed {
+      display: none;
+    }
+
+    &.x-service-nav__button-icon--open {
+      display: inline;
+    }
+  }
+}
+
+.x-service-nav__button-content {
+  .x-service-nav__button-content--hidden-mobile {
+    display: inline;
+
+    @include govuk-media-query ($until: tablet) {
+      display: none;
     }
   }
 }
 
 .x-service-nav {
-  display: none;
+  display: block;
+
+  .js-enabled & {
+    display: none;
+    
+    &.x-service-nav--open {
+      display: block;
+    }
+  }
+
   overflow: hidden;
   background: govuk-colour("light-grey");
   border-bottom: 1px solid $govuk-border-colour;
-
-  &.x-service-nav--open {
-    display: block;
-  }
 }
 
 .x-service-nav__list { 
@@ -447,7 +559,19 @@ $govuk-header-link-underline-thickness: 3px;
 
 .x-service-nav__link {
   @extend %govuk-link;
-  @include govuk-font($size: 19, $weight: bold);
+  font-weight: bold;
+
+  &:visited {
+    color: $govuk-link-colour;
+
+    &:focus {
+      color: $govuk-focus-text-colour;
+    }
+
+    &:hover {
+      color: $govuk-link-hover-colour;
+    }
+  }
 
   @include govuk-media-query ($until: tablet) {
     @include govuk-font($size: 24, $weight: bold);
