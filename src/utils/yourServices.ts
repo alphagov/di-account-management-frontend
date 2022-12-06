@@ -24,8 +24,12 @@ const unmarshallDynamoData = (dynamoDBResponse: DynamoDB.Types.AttributeMap) => 
 )
 
 const getServiceStoreItem = async (subjectId: string): Promise<Service[]> => {
-  const response = await dynamoDBService().getItem(serviceStoreDynamoDBRequest(subjectId))
-  return unmarshallDynamoData(response["Item"]).services
+  try {
+    const response = await dynamoDBService().getItem(serviceStoreDynamoDBRequest(subjectId))
+    return unmarshallDynamoData(response["Item"]).services
+  } catch (err) {
+    return []
+  }
 }
 
 export const presentYourServices = async (subjectId: string): Promise<YourServices> => {
