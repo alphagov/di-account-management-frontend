@@ -2,9 +2,9 @@ AWSTemplateFormatVersion: "2010-09-09"
 Description: >-
   This creates the necessary components to deploy the Account Management
   Frontend onto ECS Fargate.
-  Account Management Frontend can be invoked via the CloudFront Distribution, 
+  Account Management Frontend can be invoked via the CloudFront Distribution,
   use the CloudFrontDistributionEndpoint URL exported by this stack.
-  The ingress route in summary is: 
+  The ingress route in summary is:
   CloudFront -> WAF -> API Gateway -> VPC link -> Private ALB -> ECS Fargate
 Transform:
   - AWS::Serverless-2016-10-31
@@ -87,6 +87,9 @@ Parameters:
     Description: The ARN of the permissions boundary to apply when creating IAM roles
     Type: String
     Default: none
+  ServiceStoreTableName:
+    Type: String
+    Default: user_services
 
 Conditions:
   IsProduction: !Equals [ !Ref Environment, production ]
@@ -289,6 +292,12 @@ Resources:
                   - !Sub "arn:aws:secretsmanager:${AWS::Region}:${AWS::AccountId}:/${RedisStackName}/Cluster/Password"
               - Effect: Allow
                 Action:
+                  - dynamodb:Query
+                  - dynamodb:GetItem
+                Resource:
+                  - !Sub "arn:aws:dynamodb:${AWS::Region}:${AWS::AccountId}:table/${ServiceStoreTableName}"
+              - Effect: Allow
+                Action:
                   - "kms:Sign"
                   - "kms:GetPublicKey"
                 Resource:
@@ -457,6 +466,8 @@ Resources:
               Value: !FindInMap [EnvironmentVariables, !Ref Environment, SERVICEDOMAIN ]
             - Name: "LOGS_LEVEL"
               Value: !FindInMap [EnvironmentVariables, !Ref Environment, LOGSLEVEL ]
+            - Name: "SERVICE_STORE_TABLE_NAME"
+              Value: !Ref ServiceStoreTableName
       Cpu: 1024
       Memory: 2048
       ExecutionRoleArn: !GetAtt ExecutionRole.Arn
