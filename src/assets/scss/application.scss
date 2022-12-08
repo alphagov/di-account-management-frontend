@@ -485,17 +485,66 @@ $govuk-header-link-underline-thickness: 3px;
 }
 
 .x-service-nav__button-icon {
-  &.x-service-nav__button-icon--open {
+  &.x-service-nav__button-icon--open,
+  &.x-service-nav__button-icon--focus {
     display: none;
   }
 
-  .x-service-nav__button--open &,
-  .x-service-nav__button:focus-visible & {
+  .x-service-nav__button--open & {
     &.x-service-nav__button-icon--closed {
       display: none;
     }
 
     &.x-service-nav__button-icon--open {
+      display: inline;
+    }
+  }
+
+  // apply focus style on :focus for browsers which support :focus but not :focus-visible
+  .x-service-nav__button:focus & {
+    &.x-service-nav__button-icon--closed,
+    &.x-service-nav__button-icon--open {
+      display: none;
+    }
+
+    &.x-service-nav__button-icon--focus {
+      display: inline;
+    }
+  }
+
+  // overwrite previous styles for browsers which support :focus-visible
+  .x-service-nav__button:focus:not(:focus-visible) & {
+    &.x-service-nav__button-icon--closed {
+      display: inline;
+    }
+
+    &.x-service-nav__button-icon--open {
+      display: none;
+    }
+
+    &.x-service-nav__button-icon--focus {
+      display: none;
+    }
+  }
+
+  .x-service-nav__button--open:focus:not(:focus-visible) & {
+    &.x-service-nav__button-icon--open {
+      display: inline;
+    }
+
+    &.x-service-nav__button-icon--closed {
+      display: none;
+    }
+  }
+
+  // apply focus style on :focus-visible for browsers which support :focus-visible
+  .x-service-nav__button:focus-visible & {
+    &.x-service-nav__button-icon--closed,
+    &.x-service-nav__button-icon--open {
+      display: none;
+    }
+
+    &.x-service-nav__button-icon--focus {
       display: inline;
     }
   }
@@ -524,7 +573,10 @@ $govuk-header-link-underline-thickness: 3px;
 
   overflow: hidden;
   background: govuk-colour("light-grey");
-  border-bottom: 1px solid $govuk-border-colour;
+
+  @include govuk-media-query ($from: tablet) {
+    border-bottom: 1px solid $govuk-border-colour;
+  }
 }
 
 .x-service-nav__list { 
@@ -551,9 +603,12 @@ $govuk-header-link-underline-thickness: 3px;
   padding: govuk-spacing(6) 0;
 
   @include govuk-media-query ($until: tablet) {
-    border-bottom: 1px solid $govuk-border-colour;
     padding: govuk-spacing(4) govuk-spacing(3);
     width: 100%;
+
+    &:not(:last-child) {
+      border-bottom: 1px solid $govuk-border-colour;
+    }
   }
 }
 
