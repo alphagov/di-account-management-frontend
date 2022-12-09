@@ -151,16 +151,21 @@ export function getServiceDomain(): string {
 }
 
 export const getAllowedAccountListClientIDs: string[] = [
-  "client_id_1",
-  "client_id_2",
-  "client_id_3",
-]
+  "LcueBVCnGZw-YFdTZ4S07XbQx7I",
+  "ZL0kvRBP5xMy5OwONj8ARLPyuko",
+  "JO3ET6EtFN3FzjGC3yRP2qpuoHQ",
+  "gov-uk",
+  "lite",
+];
 
 export const getAllowedServiceListClientIDs: string[] = [
-  "client_id_4",
-  "client_id_5",
-  "client_id_6",
-]
+  "RqFZ83csmS4Mi4Y7s7ohD9-ekwU",
+  "XwwVDyl5oJKtK0DVsuw3sICWkPU",
+  "Dw7Cxas8W7O2usHMHok95elKDRU",
+  "oLciSn5b6-cqcJjzgMMwCw1moD8",
+  "dbs",
+  "vehicleOperatorLicense",
+];
 
 function getProtocol(): string {
   return getAppEnv() !== "local" ? "https://" : "http://";
