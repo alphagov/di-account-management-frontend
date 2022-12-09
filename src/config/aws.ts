@@ -23,6 +23,10 @@ export interface KmsConfig {
   kmsKeyId: string;
 }
 
+export interface SnsConfig {
+  awsConfig: AwsConfig;
+}
+
 export interface AwsConfig {
   endpoint?: Endpoint,
   accessKeyId?: string,
@@ -34,6 +38,30 @@ function getLocalStackKmsConfig() {
   return {
     awsConfig: { ...getLocalStackAWSConfig()},
     kmsKeyId: LOCAL_KEY_ID,
+  };
+}
+
+function getLocalStackAWSConfig(): AwsConfig {
+  return {
+    endpoint: new AWS.Endpoint(getLocalStackBaseUrl()),
+    accessKeyId: "na",
+    secretAccessKey: "na",
+    region: "eu-west-2",
+  }
+}
+
+export function getSNSConfig(): SnsConfig {
+  if (getAppEnv() === "local") {
+    return { 
+      awsConfig: { ...getLocalStackAWSConfig() }
+    }
+  }
+
+  return {
+    awsConfig: {
+      region: getAwsRegion(),
+    },
+
   };
 }
 

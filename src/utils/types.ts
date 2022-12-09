@@ -1,4 +1,5 @@
-import { DynamoDB, KMS } from "aws-sdk";
+
+import { DynamoDB, KMS, SNS } from "aws-sdk";
 
 type ClientId = string;
 type UrnFdnSub = string;
@@ -25,6 +26,10 @@ export interface KmsService {
 
 export interface DynamoDBService {
   getItem: (getCommand: DynamoDB.Types.GetItemInput) => Promise<DynamoDB.Types.GetItemOutput>,
+}
+
+export interface SnsService {
+  publish: (topic_arn: string, message: string) => Promise<SNS.Types.PublishResponse>;
 }
 
 export interface AwsConfig {

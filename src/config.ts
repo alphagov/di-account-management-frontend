@@ -114,8 +114,14 @@ export function getKmsKeyId(): string {
   return process.env.KMS_KEY_ID;
 }
 
+
 export function getDynamoServiceStoreTableName(): string {
   return process.env.SERVICE_STORE_TABLE_NAME;
+}
+
+export function getSNSDeleteTopic(): string {
+  return process.env.DELETE_TOPIC_ARN;
+
 }
 
 export function supportInternationalNumbers(): boolean {
@@ -130,8 +136,14 @@ export function supportNewAccountHeader(): boolean {
   return process.env.SUPPORT_NEW_ACCOUNT_HEADER === "1";
 }
 
+
 export function supportServiceCards(): boolean {
   return process.env.SUPPORT_SERVICE_CARDS === "1";
+}
+
+export function supportDeleteServiceStore(): boolean {
+  return process.env.SUPPORT_DELETE_SERVICE_STORE === "1";
+
 }
 
 export function getLogoutTokenMaxAge(): number {
