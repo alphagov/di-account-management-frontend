@@ -28,15 +28,15 @@ export interface SnsConfig {
 }
 
 export interface AwsConfig {
-  endpoint?: Endpoint,
-  accessKeyId?: string,
-  secretAccessKey?: string,
-  region: string
+  endpoint?: Endpoint;
+  accessKeyId?: string;
+  secretAccessKey?: string;
+  region: string;
 }
 
 function getLocalStackKmsConfig() {
   return {
-    awsConfig: { ...getLocalStackAWSConfig()},
+    awsConfig: { ...getLocalStackAWSConfig() },
     kmsKeyId: LOCAL_KEY_ID,
   };
 }
@@ -47,31 +47,21 @@ function getLocalStackAWSConfig(): AwsConfig {
     accessKeyId: "na",
     secretAccessKey: "na",
     region: "eu-west-2",
-  }
+  };
 }
 
 export function getSNSConfig(): SnsConfig {
   if (getAppEnv() === "local") {
-    return { 
-      awsConfig: { ...getLocalStackAWSConfig() }
-    }
+    return {
+      awsConfig: { ...getLocalStackAWSConfig() },
+    };
   }
 
   return {
     awsConfig: {
       region: getAwsRegion(),
     },
-
   };
-}
-
-function getLocalStackAWSConfig(): AwsConfig {
-  return {
-    endpoint: new AWS.Endpoint(getLocalStackBaseUrl()),
-    accessKeyId: "na",
-    secretAccessKey: "na",
-    region: "eu-west-2",
-  }
 }
 
 export function getAWSConfig(): AwsConfig {
@@ -81,7 +71,7 @@ export function getAWSConfig(): AwsConfig {
 
   return {
     region: getAwsRegion(),
-  }
+  };
 }
 
 export function getKMSConfig(): KmsConfig {
