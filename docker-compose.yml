@@ -7,11 +7,12 @@ services:
     ports:
       - 4566:4566
     environment:
-      - SERVICES=kms,dynamo,sns
+      - SERVICES=kms,dynamodb,sns
       - HOSTNAME_EXTERNAL=localhost
       - DEFAULT_REGION=eu-west-2
       - DEBUG=1
       - KMS_PROVIDER=local-kms
+
     volumes:
       - ./seed.yaml:/init/seed.yaml
       - "${LOCALSTACK_VOLUME_DIR:-./volume}:/var/lib/localstack"
@@ -53,5 +54,6 @@ services:
       - SUPPORT_NEW_ACCOUNT_HEADER=${SUPPORT_NEW_ACCOUNT_HEADER}
       - SUPPORT_SERVICE_CARDS=${SUPPORT_SERVICE_CARDS}
       - SUPPORT_DELETE_SERVICE_STORE=${SUPPORT_DELETE_SERVICE_STORE}
+      - TABLE_NAME= user_services
 
     restart: on-failure
