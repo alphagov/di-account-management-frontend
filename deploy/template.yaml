@@ -325,6 +325,8 @@ Resources:
                   - "kms:Decrypt"
                 Resource:
                   - !Sub "arn:aws:kms:${AWS::Region}:${AWS::AccountId}:key/{{resolve:ssm:/${BackendStackName}/KMS/SnsKmsKey/ID}}"
+                  - !Sub "arn:aws:kms:${AWS::Region}:${AWS::AccountId}:key/{{resolve:ssm:/${BackendStackName}/KMS/DatabaseKmsKey/ID}}"
+
       PermissionsBoundary: !If
         - UsePermissionsBoundary
         - !Ref PermissionsBoundary
