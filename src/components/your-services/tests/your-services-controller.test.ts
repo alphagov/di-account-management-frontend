@@ -28,7 +28,7 @@ describe("your services controller", () => {
         user: { subjectId: TEST_SUBJECT_ID, email: "test@test.com" },
         destroy: sandbox.fake(),
       },
-      log: { error: sandbox.fake() },
+      log: { error: sandbox.fake(), info: sandbox.fake() },
     };
   }
 
