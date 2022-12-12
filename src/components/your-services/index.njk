@@ -12,7 +12,7 @@
             <strong>{{ email }}</strong>
         </p>
       </div>
-      {% if not (servicesList.length and accountsList.length) %}
+      {% if not (servicesList.length or accountsList.length) %}
         {# Display an empty state when no accounts nor services have been used #}
         {# This should be an edge case as the only pathways into the account would be signing up via other services #}
         <div class="your-services__empty-state">
