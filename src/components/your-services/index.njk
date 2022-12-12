@@ -26,7 +26,7 @@
       {% if accountsList.length %}
       <ul class="govuk-list govuk-list--spaced">
         {% for account in accountsList %}
-          {% set locale = ['pages.yourServices.clientRegistry.', account.client_id, '.'] | join %}
+          {% set locale = ['pages.yourServices.clientRegistry.', env, '.', account.client_id, '.'] | join %}
           <li class="account-card">
             <h3 class="govuk-heading-s account-card__heading">{{ [locale, 'header'] | join | translate }}</h2>
             <div class="account-card__content">
@@ -47,7 +47,7 @@
       {% if servicesList.length %}
       <ul class="govuk-list service-list">
         {% for service in servicesList %}
-          {% set locale = ['pages.yourServices.clientRegistry.', service.client_id, '.'] | join %}
+          {% set locale = ['pages.yourServices.clientRegistry.', env, '.', service.client_id, '.'] | join %}
           <li class="service-list__card">
             <p class="govuk-body">
               <a class="govuk-link" href="{{ [locale, 'link_href'] | join | translate }}">{{ [locale, 'link_text'] | join | translate }}</a>

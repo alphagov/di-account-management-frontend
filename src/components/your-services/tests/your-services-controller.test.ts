@@ -5,6 +5,7 @@ import { sinon } from "../../../../test/utils/test-utils";
 import { Request, Response } from "express";
 
 import { yourServicesGet } from "../your-services-controller";
+import { getAppEnv } from "../../../config";
 describe("your services controller", () => {
   let sandbox: sinon.SinonSandbox;
   let req: Partial<Request>;
@@ -50,6 +51,7 @@ describe("your services controller", () => {
         email: "test@test.com",
         accountsList: [],
         servicesList: [],
+        env: getAppEnv(),
       });
     });
 
@@ -65,6 +67,7 @@ describe("your services controller", () => {
       await yourServicesGet(req as Request, res as Response);
       expect(res.render).to.have.calledWith("your-services/index.njk", {
         email: "test@test.com",
+        env: getAppEnv(),
       });
     });
   });
