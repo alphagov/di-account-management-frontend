@@ -52,9 +52,9 @@
           {% set locale = ['pages.yourServices.clientRegistry.', env, '.', service.client_id, '.'] | join %}
           <li class="your-services__card">
             <div class="your-services__card__content">
-            <p class="govuk-body">
+            <h3 class="govuk-heading-s govuk-!-font-weight-regular">
               <a class="govuk-link" href="{{ [locale, 'link_href'] | join | translate }}">{{ [locale, 'link_text'] | join | translate }}</a>
-            </p>
+            </h3>
             <p class="govuk-body your-services__card__last-used">{{ 'pages.yourServices.lastUsed' | translate }}: {{ service.last_accessed_pretty }}</p>
             </div>
           </li>
