@@ -65,3 +65,7 @@
     <script type="text/javascript" src="/public/scripts/showPassword.js"></script>
 {% endblock %}
 
+{% block bodyEnd %}
+  <script type="text/javascript" nonce='{{scriptNonce}}'>window.DI = window.DI || {};window.DI.taxonomyLevel2 = "password"</script>
+  {{ super() }}
+{% endblock %}

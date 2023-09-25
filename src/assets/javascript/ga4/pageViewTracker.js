@@ -48,7 +48,8 @@ window.DI.Analytics.Ga4.trackers = window.DI.Analytics.Ga4.trackers || {};
     },
 
     getTaxonomy2: function() {
-      return 'account'
+      // this is on purpose, the requirement is that an "undefined" string is returned when taxonomy 2 has not been specified
+      return window.DI.taxonomyLevel2 || "undefined"
     }
   }
 
