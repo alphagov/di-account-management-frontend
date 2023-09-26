@@ -2,6 +2,18 @@
 {% from "common/show-password/macro.njk" import govukInputWithShowPassword %}
 {% from "govuk/components/button/macro.njk" import govukButton %}
 {% from "govuk/components/error-summary/macro.njk" import govukErrorSummary %}
+{% set taxonomyLevel2 =  "undefined" %}
+
+{% if requestType == 'changePassword' %}
+    {% set taxonomyLevel2 =  "password" %}
+{% elif requestType == 'changeEmail' %}
+    {% set taxonomyLevel2 =  "email" %}
+{% elif requestType == 'changePhoneNumber' %}
+    {% set taxonomyLevel2 =  "phone no" %}
+{% elif requestType == 'deleteAccount' %}
+    {% set taxonomyLevel2 =  "delete account" %}
+{% endif %}
+
 
 {% if requestType == 'changePassword' %}
     {% set pageTitleName = 'pages.enterPassword.changePassword.title' | translate %}
@@ -33,4 +45,9 @@
 
 {% block scripts %}
     <script type="text/javascript" src="/public/scripts/showPassword.js"></script>
+{% endblock %}
+
+{% block bodyEnd %}
+  <script type="text/javascript" nonce='{{scriptNonce}}'>window.DI = window.DI || {};window.DI.taxonomyLevel2 = "{{ taxonomyLevel2 }}"</script>
+  {{ super() }}
 {% endblock %}
