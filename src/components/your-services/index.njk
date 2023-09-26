@@ -85,3 +85,8 @@
     </div>
   </div>
 {% endblock %}
+
+{% block bodyEnd %}
+  <script type="text/javascript" nonce='{{scriptNonce}}'>window.DI = window.DI || {};window.DI.taxonomyLevel2 = "account"</script>
+  {{ super() }}
+{% endblock %}
