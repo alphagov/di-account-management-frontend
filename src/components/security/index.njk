@@ -1,5 +1,6 @@
 {% extends "common/layout/base.njk" %}
 {% from "govuk/components/summary-list/macro.njk" import govukSummaryList %}
+{% from "common/scripts/taxonomy.njk" import taxonomyLevel2 %}
 {% set pageTitleName = 'pages.security.title' | translate %}
 
 {% set accountDetailsSummaryList = {
@@ -110,6 +111,6 @@ set mfaSummaryList = {
 {% endblock %}
 
 {% block bodyEnd %}
-  <script type="text/javascript" nonce='{{scriptNonce}}'>window.DI = window.DI || {};window.DI.taxonomyLevel2 = "account"</script>
+  {{ taxonomyLevel2("account", scriptNonce) }}
   {{ super() }}
 {% endblock %}

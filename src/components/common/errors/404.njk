@@ -18,6 +18,12 @@
 {% endblock %}
 
 {% block bodyEnd %}
-  <script type="text/javascript" nonce='{{scriptNonce}}'>window.DI = window.DI || {};window.DI.httpStatusCode = 404</script>
+  <script type="text/javascript" nonce='{{scriptNonce}}'>
+    window.DI = window.DI || {};
+    window.DI.httpStatusCode = 404;
+    if (window.sessionStorage.getItem("taxonomyLevel2")) {
+      window.DI.taxonomyLevel2 = window.sessionStorage.getItem("taxonomyLevel2")
+    }
+  </script>
   {{ super() }}
 {% endblock %}

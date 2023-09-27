@@ -3,6 +3,7 @@
 {% from "govuk/components/error-summary/macro.njk" import govukErrorSummary %}
 {% from "govuk/components/inset-text/macro.njk" import govukInsetText %}
 {% from "govuk/components/details/macro.njk" import govukDetails %}
+{% from "common/scripts/taxonomy.njk" import taxonomyLevel2 %}
 {% set pageTitleName = 'pages.deleteAccount.title' | translate %}
 
 {% block pageContent%}
@@ -58,6 +59,6 @@
 {% endblock %}
 
 {% block bodyEnd %}
-  <script type="text/javascript" nonce='{{scriptNonce}}'>window.DI = window.DI || {};window.DI.taxonomyLevel2 = "delete account"</script>
+  {{ taxonomyLevel2("delete account", scriptNonce) }}
   {{ super() }}
 {% endblock %}

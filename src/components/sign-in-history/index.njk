@@ -2,6 +2,7 @@
 {% from "govuk/components/summary-list/macro.njk" import govukSummaryList %}
 {% from "govuk/components/inset-text/macro.njk" import govukInsetText %}
 {% from "govuk/components/pagination/macro.njk" import govukPagination %}
+{% from "common/scripts/taxonomy.njk" import taxonomyLevel2 %}
 {% set pageTitleName = 'pages.signInHistory.title' | translate %}
 {% set backLink = "/settings" %}
 {% set contactLink = "https://signin.account.gov.uk/contact-us-questions?theme=something_else&referer=" %}
@@ -92,6 +93,6 @@
 {% endblock %}
 
 {% block bodyEnd %}
-  <script type="text/javascript" nonce='{{scriptNonce}}'>window.DI = window.DI || {};window.DI.taxonomyLevel2 = "account"</script>
+  {{ taxonomyLevel2("account", scriptNonce) }}
   {{ super() }}
 {% endblock %}

@@ -1,5 +1,6 @@
 {% extends "common/layout/base.njk" %}
 {% from "govuk/components/details/macro.njk" import govukDetails %}
+{% from "common/scripts/taxonomy.njk" import taxonomyLevel2 %}
 {% set pageTitleName = 'pages.yourServices.title' | translate %}
 {% set serviceLinks =  'pages.yourServices.informationBox.details.listItems' | translate({ returnObjects: true }) %}
 {% set activeNav = 'your-services' %}
@@ -87,6 +88,6 @@
 {% endblock %}
 
 {% block bodyEnd %}
-  <script type="text/javascript" nonce='{{scriptNonce}}'>window.DI = window.DI || {};window.DI.taxonomyLevel2 = "account"</script>
+  {{ taxonomyLevel2("account", scriptNonce) }}
   {{ super() }}
 {% endblock %}

@@ -1,6 +1,7 @@
 {% extends "common/layout/base.njk" %}
 {% from "govuk/components/button/macro.njk" import govukButton %}
 {% from "govuk/components/inset-text/macro.njk" import govukInsetText %}
+{% from "common/scripts/taxonomy.njk" import taxonomyLevel2 %}
 
 {% set pageTitleName = 'pages.resendMfaCode.title' | translate %}
 {% set showBack = true %}
@@ -30,6 +31,6 @@
 {% endblock %}
 
 {% block bodyEnd %}
-  <script type="text/javascript" nonce='{{scriptNonce}}'>window.DI = window.DI || {};window.DI.taxonomyLevel2 = "email"</script>
+  {{ taxonomyLevel2("email", scriptNonce) }}
   {{ super() }}
 {% endblock %}

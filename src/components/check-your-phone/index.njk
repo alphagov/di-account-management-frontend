@@ -4,6 +4,7 @@
 {% from "govuk/components/button/macro.njk" import govukButton %}
 {% from "govuk/components/details/macro.njk" import govukDetails %}
 {% from "govuk/components/error-summary/macro.njk" import govukErrorSummary %}
+{% from "common/scripts/taxonomy.njk" import taxonomyLevel2 %}
 
 {% set pageTitleName = 'pages.checkYourPhone.title' | translate %}
 
@@ -57,6 +58,6 @@
 {% endblock %}
 
 {% block bodyEnd %}
-  <script type="text/javascript" nonce='{{scriptNonce}}'>window.DI = window.DI || {};window.DI.taxonomyLevel2 = "phone no"</script>
+  {{ taxonomyLevel2("phone no", scriptNonce) }}
   {{ super() }}
 {% endblock %}

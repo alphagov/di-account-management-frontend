@@ -1,0 +1,8 @@
+{% macro taxonomyLevel2(value,nonce) %}
+  {% set taxonomy = value if value else "undefined" %}
+  <script type="text/javascript" nonce='{{nonce}}'>
+    window.DI = window.DI || {};
+    window.DI.taxonomyLevel2 = '{{taxonomy}}';
+    window.sessionStorage.setItem("taxonomyLevel2", '{{taxonomy}}')
+  </script>
+{% endmacro %}

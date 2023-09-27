@@ -4,6 +4,7 @@
 {% from "govuk/components/details/macro.njk" import govukDetails %}
 {% from "govuk/components/checkboxes/macro.njk" import govukCheckboxes %}
 {% from "govuk/components/error-summary/macro.njk" import govukErrorSummary %}
+{% from "common/scripts/taxonomy.njk" import taxonomyLevel2 %}
 {% set pageTitleName = 'pages.changePhoneNumber.title' | translate %}
 {% block content %}
 
@@ -83,8 +84,7 @@
 </a>
 {% endblock %}
 
-
 {% block bodyEnd %}
-  <script type="text/javascript" nonce='{{scriptNonce}}'>window.DI = window.DI || {};window.DI.taxonomyLevel2 = "phone no"</script>
+  {{ taxonomyLevel2("phone no", scriptNonce) }}
   {{ super() }}
 {% endblock %}
