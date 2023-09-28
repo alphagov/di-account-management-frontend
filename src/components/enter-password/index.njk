@@ -3,16 +3,16 @@
 {% from "govuk/components/button/macro.njk" import govukButton %}
 {% from "govuk/components/error-summary/macro.njk" import govukErrorSummary %}
 {% from "common/scripts/taxonomy.njk" import taxonomyLevel2 %}
-{% set taxonomyLevel2 =  "undefined" %}
+{% set taxonomy =  "undefined" %}
 
 {% if requestType == 'changePassword' %}
-    {% set taxonomyLevel2 =  "password" %}
+    {% set taxonomy =  "password" %}
 {% elif requestType == 'changeEmail' %}
-    {% set taxonomyLevel2 =  "email" %}
+    {% set taxonomy =  "email" %}
 {% elif requestType == 'changePhoneNumber' %}
-    {% set taxonomyLevel2 =  "phone no" %}
+    {% set taxonomy =  "phone no" %}
 {% elif requestType == 'deleteAccount' %}
-    {% set taxonomyLevel2 =  "delete account" %}
+    {% set taxonomy =  "delete account" %}
 {% endif %}
 
 
@@ -49,6 +49,6 @@
 {% endblock %}
 
 {% block bodyEnd %}
-  {{ taxonomyLevel2(taxonomyLevel2, scriptNonce) }}
+  {{ taxonomyLevel2(taxonomy, scriptNonce) }}
   {{ super() }}
 {% endblock %}
