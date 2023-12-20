@@ -246,6 +246,14 @@ $nav-active-border-thickness: 5px;
   background-color: unset;
 }
 
+.account-header-navigation__button {
+  @include govuk-font($size: 16, $weight: bold);
+  border: 0 none;
+  cursor: pointer;
+  color: govuk-colour(white);
+  padding: 0;
+}
+
 .account-navigation__button {
   @include govuk-font($size: 19, $weight: bold);
   border: 0 none;
