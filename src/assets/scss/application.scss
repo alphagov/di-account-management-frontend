@@ -239,6 +239,21 @@ $nav-active-border-thickness: 5px;
   }
 }
 
+.account-header-navigation__button {
+  @include govuk-font($size: 19, $weight: bold);
+  border: 0 none;
+  cursor: pointer;
+  background-color: unset;
+}
+
+.account-navigation__button {
+  @include govuk-font($size: 19, $weight: bold);
+  border: 0 none;
+  cursor: pointer;
+  background-color: unset;
+  color: $govuk-link-colour;
+}
+
 .your-services__heading {
   margin-bottom: govuk-spacing(3);
 }
