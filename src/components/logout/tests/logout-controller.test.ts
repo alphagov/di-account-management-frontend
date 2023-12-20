@@ -2,7 +2,7 @@ import { expect } from "chai";
 import { describe } from "mocha";
 
 import { sinon } from "../../../../test/utils/test-utils";
-import { logoutGet } from "../logout-controller";
+import { logoutPost } from "../logout-controller";
 
 describe("logout controller", () => {
   let sandbox: sinon.SinonSandbox;
@@ -31,7 +31,7 @@ describe("logout controller", () => {
     sandbox.restore();
   });
 
-  describe("logoutGet", () => {
+  describe("logoutPost", () => {
     it("should redirect to end session url and set cookie", () => {
       req.session.user.tokens = {
         idToken: "id-token",
@@ -39,7 +39,7 @@ describe("logout controller", () => {
 
       req.session.destroy = sandbox.fake();
 
-      logoutGet(req, res);
+      logoutPost(req, res);
 
       expect(res.redirect).to.have.called;
       expect(req.session.destroy).to.have.been.calledOnce;
