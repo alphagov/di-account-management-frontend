@@ -249,6 +249,16 @@ $nav-active-border-thickness: 5px;
   @include govuk-font($size: 16, $weight: bold);
   color: govuk-colour(white);
   padding: 0;
+  text-decoration: none;
+
+  &:hover {
+    text-decoration: underline;
+    text-decoration-thickness: 3px;
+  }
+
+  &:focus {
+    @include govuk-focused-text;
+  }
 }
 
 .account-navigation__button {
