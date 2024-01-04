@@ -250,10 +250,12 @@ $nav-active-border-thickness: 5px;
   color: govuk-colour(white);
   padding: 0;
   text-decoration: none;
-
+  position: absolute;
+  top: govuk-spacing(4);
+  right: 0;
+  margin: 0;
   &:hover {
-    text-decoration: underline;
-    text-decoration-thickness: 3px;
+    text-decoration: solid underline 3px;
   }
 
   &:focus {

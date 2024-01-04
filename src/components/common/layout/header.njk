@@ -17,16 +17,11 @@
         </div>
         {% if showSignOut %}
             <div class="govuk-header__content">
-                <nav aria-label="Menu" class="govuk-header__navigation ">
-                    <button type="button" class="govuk-header__menu-button govuk-js-header-toggle" aria-controls="navigation" aria-label="Show or hide menu" hidden="">Menu</button>
-                    <ul id="navigation" class="govuk-header__navigation-list">
-                        <li class="govuk-header__navigation-item">
-                            <form action="{{ accountSignOut }}" method="post">
-                                <input type="hidden" name="_csrf" value="{{ csrfToken }}" />
-                                <button class="account-header-navigation__button" type="submit">{{ 'general.header.signOutLink' | translate }}</button>
-                            </form>
-                        </li>
-                    </ul>
+                <nav aria-label="{{ 'general.header.signOutLink' | translate }}">
+                    <form action="{{ accountSignOut }}" method="post">
+                        <input type="hidden" name="_csrf" value="{{ csrfToken }}" />
+                        <button class="account-header-navigation__button" type="submit">{{ 'general.header.signOutLink' | translate }}</button>
+                    </form>
                 </nav>
             </div>
         {% endif %}
