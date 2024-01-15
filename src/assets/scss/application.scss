@@ -66,7 +66,7 @@ $govuk-new-link-styles: true;
 
 .govuk-summary-list--activity-log {
   .govuk-summary-list__key {
-    @include govuk-font($size: 24, $weight: bold)
+    @include govuk-font($size: 24, $weight: bold);
   }
 
   @include govuk-media-query($from: "tablet") {
@@ -239,19 +239,84 @@ $nav-active-border-thickness: 5px;
   }
 }
 
+:root {
+  --govuk-white: #ffffff; /* Replace with actual color code */
+  --govuk-link-hover-colour: #yourColorCode; /* Replace with actual color code */
+  --govuk-link-colour: #yourLinkColor; /* Replace with actual link color */
+}
+
+/* Combined styles for buttons */
 .account-header-navigation__button, .account-navigation__button {
   border: 0 none;
   cursor: pointer;
   background-color: unset;
+  padding: 0;
+  position: relative; /* Added for positioning pseudo-elements */
 }
 
-.account-header-navigation__button:after {
-  display: none;
+/* Specific styles for .account-header-navigation__button */
+.account-header-navigation__button {
+  @include govuk-font($size: 16);
+  color: govuk-colour("white");
 }
 
+/* Hover effect for .account-header-navigation__button */
+.account-header-navigation__button:hover::after {
+  content: "";
+  display: block;
+  width: 100%;
+  background: govuk-colour("white");
+  position: absolute;
+  bottom: 0;
+  height: 3px;
+}
+
+/* Specific styles for .account-navigation__button */
 .account-navigation__button {
   @include govuk-font($size: 19, $weight: bold);
   color: $govuk-link-colour;
+}
+
+/* Wrapper hover styles */
+.account-header-navigation__button-wrapper, .account-navigation__button-wrapper {
+  position: relative; /* Ensure position context for pseudo-elements */
+}
+
+/* Hover effect for wrappers */
+.account-header-navigation__button-wrapper:hover,
+.account-navigation__button-wrapper:hover {
+  cursor: pointer;
+
+  /* Nested hover state for button */
+  button {
+    color: $govuk-link-hover-colour;
+  }
+
+  /* After pseudo-element for hover underline */
+  &::after {
+    content: "";
+    display: block;
+    width: 100%;
+    background: $govuk-link-hover-colour;
+    position: absolute;
+    bottom: 3px;
+    height: 3px;
+  }
+}
+.account-navigation__button-wrapper:hover::after {
+  bottom: -1px;
+}
+
+/* Positioning for the navigation form */
+.account-header-navigation__form {
+  position: absolute;
+  top: govuk-spacing(3);
+  right: 0;
+}
+
+/* Positioning for the header button wrapper */
+.account-navigation__header-button-wrapper {
+  position: relative;
 }
 
 
