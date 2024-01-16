@@ -246,6 +246,11 @@ $nav-active-border-thickness: 5px;
   background-color: unset;
   padding: 0;
   position: relative; /* Added for positioning pseudo-elements */
+  &:focus {
+    outline-style: unset;
+    background-color: $govuk-focus-colour;
+    color: $govuk-focus-text-colour;
+  }
 }
 
 /* Specific styles for .account-header-navigation__button */
@@ -258,6 +263,8 @@ $nav-active-border-thickness: 5px;
 .account-navigation__button {
   @include govuk-font($size: 19, $weight: bold);
   color: $govuk-link-colour;
+  box-sizing: border-box;
+  padding: 15px 0;
 }
 
 /* Wrapper hover styles */
@@ -292,6 +299,11 @@ $nav-active-border-thickness: 5px;
 .account-header-navigation__button:hover::after {
   background: govuk-colour("white");
   bottom: -1px;
+}
+
+.account-navigation__button-wrapper:focus-within {
+  border-bottom: 4px solid $govuk-focus-text-colour;
+  padding: 0 0 16px 0;
 }
 
 
