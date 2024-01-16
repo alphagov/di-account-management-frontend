@@ -247,7 +247,7 @@ $nav-active-border-thickness: 5px;
   padding: 0;
   position: relative; /* Added for positioning pseudo-elements */
   &:focus {
-    outline-style: unset;
+    outline: none;
     background-color: $govuk-focus-colour;
     color: $govuk-focus-text-colour;
   }
@@ -270,6 +270,14 @@ $nav-active-border-thickness: 5px;
 /* Wrapper hover styles */
 .account-header-navigation__button-wrapper, .account-navigation__button-wrapper {
   position: relative; /* Ensure position context for pseudo-elements */
+  &:focus {
+    outline: none;
+    button {
+      outline: none;
+      background-color: $govuk-focus-colour;
+      color: $govuk-focus-text-colour;
+    }
+  }
 }
 
 /* Hover effect for wrappers */
