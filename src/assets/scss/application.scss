@@ -239,12 +239,6 @@ $nav-active-border-thickness: 5px;
   }
 }
 
-:root {
-  --govuk-white: #ffffff; /* Replace with actual color code */
-  --govuk-link-hover-colour: #yourColorCode; /* Replace with actual color code */
-  --govuk-link-colour: #yourLinkColor; /* Replace with actual link color */
-}
-
 /* Combined styles for buttons */
 .account-header-navigation__button, .account-navigation__button {
   border: 0 none;
@@ -260,17 +254,6 @@ $nav-active-border-thickness: 5px;
   color: govuk-colour("white");
 }
 
-/* Hover effect for .account-header-navigation__button */
-.account-header-navigation__button:hover::after {
-  content: "";
-  display: block;
-  width: 100%;
-  background: govuk-colour("white");
-  position: absolute;
-  bottom: 0;
-  height: 3px;
-}
-
 /* Specific styles for .account-navigation__button */
 .account-navigation__button {
   @include govuk-font($size: 19, $weight: bold);
@@ -284,7 +267,8 @@ $nav-active-border-thickness: 5px;
 
 /* Hover effect for wrappers */
 .account-header-navigation__button-wrapper:hover,
-.account-navigation__button-wrapper:hover {
+.account-navigation__button-wrapper:hover,
+.account-header-navigation__button:hover {
   cursor: pointer;
 
   /* Nested hover state for button */
@@ -299,13 +283,17 @@ $nav-active-border-thickness: 5px;
     width: 100%;
     background: $govuk-link-hover-colour;
     position: absolute;
-    bottom: 3px;
+    bottom: 0;
     height: 3px;
   }
 }
-.account-navigation__button-wrapper:hover::after {
+
+/* Hover effect for .account-header-navigation__button */
+.account-header-navigation__button:hover::after {
+  background: govuk-colour("white");
   bottom: -1px;
 }
+
 
 /* Positioning for the navigation form */
 .account-header-navigation__form {
