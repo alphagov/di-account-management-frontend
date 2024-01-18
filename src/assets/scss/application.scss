@@ -201,7 +201,57 @@ $nav-link-padding: govuk-spacing(3);
 $nav-link-outline-thickness: 2px;
 $nav-active-border-thickness: 5px;
 
-.account-navigation__link {
+/* Combined styles for buttons */
+.account-header-navigation__button, 
+.account-navigation__button {
+  border: 0 none;
+  cursor: pointer;
+  background-color: unset;
+  padding: 0;
+  // position: relative; /* Added for positioning pseudo-elements */
+  &:focus {
+    outline: none;
+    background-color: $govuk-focus-colour;
+    color: $govuk-focus-text-colour;
+  }
+}
+
+/* Specific styles for .account-header-navigation__button */
+.account-header-navigation__button {
+  @include govuk-font($size: 16);
+  color: govuk-colour("white");
+  @include govuk-link-style-inverse;
+  text-decoration: none;
+
+  &:hover {
+    text-decoration: underline;
+    text-decoration-thickness: 3px;
+
+    @if $govuk-link-underline-offset {
+      text-underline-offset: $govuk-link-underline-offset;
+    }
+  }
+
+  &:focus {
+    @include govuk-focused-text;
+  }
+}
+
+// /* Specific styles for .account-navigation__button */
+.account-navigation__button {
+  color: $govuk-link-colour;
+  font-size: inherit;
+}
+
+// /* Positioning for the navigation form */
+.account-header-navigation__form {
+  position: absolute;
+  top: govuk-spacing(3);
+  right: 0;
+}
+
+.account-navigation__link,
+.account-navigation__button {
   @extend .govuk-link;
   display: inline-block;
   font-weight: bold;
@@ -238,95 +288,6 @@ $nav-active-border-thickness: 5px;
     }
   }
 }
-
-/* Combined styles for buttons */
-.account-header-navigation__button, .account-navigation__button {
-  border: 0 none;
-  cursor: pointer;
-  background-color: unset;
-  padding: 0;
-  position: relative; /* Added for positioning pseudo-elements */
-  &:focus {
-    outline: none;
-    background-color: $govuk-focus-colour;
-    color: $govuk-focus-text-colour;
-  }
-}
-
-/* Specific styles for .account-header-navigation__button */
-.account-header-navigation__button {
-  @include govuk-font($size: 16);
-  color: govuk-colour("white");
-}
-
-/* Specific styles for .account-navigation__button */
-.account-navigation__button {
-  @include govuk-font($size: 19, $weight: bold);
-  color: $govuk-link-colour;
-  box-sizing: border-box;
-  padding: 15px 0;
-}
-
-/* Wrapper hover styles */
-.account-header-navigation__button-wrapper, .account-navigation__button-wrapper {
-  position: relative; /* Ensure position context for pseudo-elements */
-  &:focus {
-    outline: none;
-    button {
-      outline: none;
-      background-color: $govuk-focus-colour;
-      color: $govuk-focus-text-colour;
-    }
-  }
-}
-
-/* Hover effect for wrappers */
-.account-header-navigation__button-wrapper:hover,
-.account-navigation__button-wrapper:hover,
-.account-header-navigation__button:hover {
-  cursor: pointer;
-
-  /* Nested hover state for button */
-  button {
-    color: $govuk-link-hover-colour;
-  }
-
-  /* After pseudo-element for hover underline */
-  &::after {
-    content: "";
-    display: block;
-    width: 100%;
-    background: $govuk-link-hover-colour;
-    position: absolute;
-    bottom: 0;
-    height: 3px;
-  }
-}
-
-/* Hover effect for .account-header-navigation__button */
-.account-header-navigation__button:hover::after {
-  background: govuk-colour("white");
-  bottom: -1px;
-}
-
-.account-navigation__button-wrapper:focus-within {
-  border-bottom: 4px solid $govuk-focus-text-colour;
-  padding: 0 0 16px 0;
-}
-
-
-/* Positioning for the navigation form */
-.account-header-navigation__form {
-  position: absolute;
-  top: govuk-spacing(3);
-  right: 0;
-}
-
-/* Positioning for the header button wrapper */
-.account-navigation__header-button-wrapper {
-  position: relative;
-}
-
 
 .your-services__heading {
   margin-bottom: govuk-spacing(3);
