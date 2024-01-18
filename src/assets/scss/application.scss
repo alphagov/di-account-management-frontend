@@ -208,7 +208,8 @@ $nav-active-border-thickness: 5px;
   cursor: pointer;
   background-color: unset;
   padding: 0;
-  // position: relative; /* Added for positioning pseudo-elements */
+  margin: 0;
+
   &:focus {
     outline: none;
     background-color: $govuk-focus-colour;
@@ -223,12 +224,14 @@ $nav-active-border-thickness: 5px;
   @include govuk-link-style-inverse;
   text-decoration: none;
 
-  &:hover {
-    text-decoration: underline;
-    text-decoration-thickness: 3px;
-
-    @if $govuk-link-underline-offset {
-      text-underline-offset: $govuk-link-underline-offset;
+  span {
+    &:hover {
+      text-decoration: underline;
+      text-decoration-thickness: 3px;
+  
+      @if $govuk-link-underline-offset {
+        text-underline-offset: $govuk-link-underline-offset;
+      }
     }
   }
 
