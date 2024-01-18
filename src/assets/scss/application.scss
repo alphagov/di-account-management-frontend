@@ -224,14 +224,12 @@ $nav-active-border-thickness: 5px;
   @include govuk-link-style-inverse;
   text-decoration: none;
 
-  span {
-    &:hover {
-      text-decoration: underline;
-      text-decoration-thickness: 3px;
-  
-      @if $govuk-link-underline-offset {
-        text-underline-offset: $govuk-link-underline-offset;
-      }
+  &:hover {
+    text-decoration: underline;
+    text-decoration-thickness: 3px;
+
+    @if $govuk-link-underline-offset {
+      text-underline-offset: $govuk-link-underline-offset;
     }
   }
 
