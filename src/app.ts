@@ -72,7 +72,7 @@ import { deleteMfaMethodRouter } from "./components/delete-mfa-method/delete-mfa
 import { switchBackupMethodRouter } from "./components/switch-backup-method/switch-backup-method-routes";
 import { changeDefaultMethodRouter } from "./components/change-default-method/change-default-method-routes";
 import { isUserLoggedInMiddleware } from "./middleware/is-user-logged-in-middleware";
-import { applyOverloadProtection } from "./middleware/overload-protection-middleware";
+// import { applyOverloadProtection } from "./middleware/overload-protection-middleware";
 import { getOIDCClient } from "./utils/oidc";
 import { frontendVitalSignsInit } from "@govuk-one-login/frontend-vital-signs";
 import { Server } from "node:http";
@@ -90,10 +90,10 @@ async function createApp(): Promise<express.Application> {
 
   app.enable("trust proxy");
 
-  if (isProduction) {
-    const protect = applyOverloadProtection(isProduction);
-    app.use(protect);
-  }
+  // if (isProduction) {
+  //   const protect = applyOverloadProtection(isProduction);
+  //   app.use(protect);
+  // }
 
   app.use(outboundContactUsLinksMiddleware);
   app.use(express.json());
