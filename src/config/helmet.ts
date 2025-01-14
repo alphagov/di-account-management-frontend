@@ -78,8 +78,6 @@ export const webchatHelmetConfiguration: HelmetOptions = {
       ],
       scriptSrcAttr: [
         "'self'",
-        (req: Request, res: Response): string =>
-          `'nonce-${res.locals.scriptNonce}'`,
         "https://*.smartagent.app",
         "https://participant.connect.eu-west-2.amazonaws.com",
         "https://*.s3.eu-west-2.amazonaws.com",
