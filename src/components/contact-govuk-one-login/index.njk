@@ -167,27 +167,29 @@
   <script type="text/javascript" nonce='{{scriptNonce}}'>
     var launchWebchatButton = document.querySelector("[data-launch-webchat]");
 
-    launchWebchatButton.addEventListener("click", function() {
-      const webchatWindow = document.querySelector(".sa-chat-slideout");
-      if (window._sa && webchatWindow) {
-        try {
-          window._sa.toggleChat();
-          // setTimeout is only necessary here because the toggleChat() function uses setTimeout when setting focus and toggling the isOpen state
-          setTimeout(() => {
-            if (window._sa.isOpen()) {
-              // when the webchat is opened using the "Use webchat" button, move focus to the first focusable element in the window
-              webchatWindow.querySelector('button').focus();
-            } else {
-              // when the webchat is closed using the "Use webchat" button, move focus back to the "Use webchat" button
-              launchWebchatButton.focus();
-            }
-          },0)
-        }
-        catch(err) {
-          console.error(err);
-        }
-      }
-    });
+    document.addEventListener('DOMContentLoaded', function() {
+        launchWebchatButton.addEventListener("click", function() {
+              const webchatWindow = document.querySelector(".sa-chat-slideout");
+              if (window._sa && webchatWindow) {
+                try {
+                  window._sa.toggleChat();
+                  // setTimeout is only necessary here because the toggleChat() function uses setTimeout when setting focus and toggling the isOpen state
+                  setTimeout(() => {
+                    if (window._sa.isOpen()) {
+                      // when the webchat is opened using the "Use webchat" button, move focus to the first focusable element in the window
+                      webchatWindow.querySelector('button').focus();
+                    } else {
+                      // when the webchat is closed using the "Use webchat" button, move focus back to the "Use webchat" button
+                      launchWebchatButton.focus();
+                    }
+                  },0)
+                }
+                catch(err) {
+                  console.error(err);
+                }
+              }
+            });
+      });
 
     function waitForSaEvents(){
       // if saEvents does not exist, chat has not loaded yet
