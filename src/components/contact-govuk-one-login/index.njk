@@ -125,7 +125,7 @@
           <p class="govuk-body">{{ paragraph }}</p>
         {% endfor %}
 
-        <p class="govuk-body"><button type="button" class="launch-webchat-link" data-launch-webchat hidden>{{ 'pages.contact.section3.webchat.linkText' | translate }}</button></p>
+        <p class="govuk-body"><button type="button" nonce="{{ scriptNonce }} class="launch-webchat-link" data-launch-webchat hidden>{{ 'pages.contact.section3.webchat.linkText' | translate }}</button></p>
 
         {% set accessibilityTextHtml %}
           <p class="govuk-body">{{ 'pages.contact.section3.webchat.accessibilityStatementParagraph' | translate | safe | replace('[accessibilityStatementLinkHref]', accessibilityStatementUrl )  }}</p>
